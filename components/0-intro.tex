@@ -1,0 +1,199 @@
+\section{Introduction}
+
+\subsection{Problem Statement}
+\begin{frame}{Problem Statement}
+	In this project we aim to enhance online fashion retail by developing an AI-based clothing recommender and an AR-powered virtual try-on towards reducing uncertainty and high return rates amongst consumers.
+\end{frame}
+
+\subsection{Motivation}
+\begin{frame}{Motivation}
+	\begin{enumerate}
+		\item Online shoppers face an overwhelming array of clothing choices, often leading to hesitation and indecision.
+		\item The inability to try on garments before purchase has long been a pain point for consumers.
+		\item The issue of high return rates in e-commerce, particularly in the fashion sector, has far-reaching environmental consequences.
+	\end{enumerate}
+\end{frame}
+
+\subsection{Literature Review}
+\newcommand{\checkif}[1]{
+	\ifthenelse{\equal{#1}{Y}}{\checkmark}{}
+}
+\newcommand{\rsrow}[8]{
+	\citeauthor{#1} \cite{#1} & #2 &
+	\checkif{#3} &
+	\checkif{#4} &
+	\checkif{#6} &
+	\checkif{#8}
+	\\ \hline
+}
+
+\newcommand{\commrow}[3]{
+	#2 & \cite{#1} & #3 \\ \addlinespace
+}
+\begin{frame}[allowframebreaks]{Literature Review}
+	A review of Fashion Recommendation Systems:
+	{
+		\tiny
+		\renewcommand{\arraystretch}{1.15}
+		\begin{xltabular}{\textwidth}{
+			p{2.25cm} | X |
+			>{\centering\arraybackslash}p{1cm} |
+			>{\centering\arraybackslash}p{1.15cm} |
+			>{\centering\arraybackslash}p{1.05cm} |
+			>{\centering\arraybackslash}p{1.15cm}
+		}
+			\hline
+				\textbf{Authors} &
+				\textbf{Technique(s)} &
+				\multicolumn{2}{c|}{\textbf{User Inputs}} &
+				\multirow{2}{1.1cm}{\centering \textbf{Outfit Generation}} &
+				\textbf{Personalized} \\
+				& & Attributes & Interactions\footnotemark[1] & & \\
+			\hline \hline
+				\rsrow{DBLP:journals/eswa/MoZPW23}{
+					Transformer $\rightarrow$ Transformer
+				}{Y}{}{Y}{Y}{}{Y}
+				\rsrow{10049142}{
+					Contextual Attention Network
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:journals/eswa/BalimO23}{
+					CNN $\rightarrow$ LSTM + Transformer
+				}{}{Y}{Y}{}{Y}{}
+				\rsrow{9857004}{
+					Triplet Network
+				}{}{}{Y}{Y}{}{}
+				\rsrow{9893574}{
+					Bi-LSTM, GAN
+				}{}{}{Y}{Y}{}{}
+				\rsrow{9775146}{
+					Bi-LSTM
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:journals/tomccap/YangSFWDN21}{
+					Representation Learning
+				}{}{Y}{Y}{Y}{Y}{}
+				\rsrow{DBLP:conf/iccvw/KimSMSSP21}{
+					CNN + Projection Head
+				}{}{}{Y}{Y}{}{}
+				\rsrow{9156535}{
+					CNN + Triplet Network
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:conf/sigir/DongWSDN20}{
+					Bi-LSTM
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:journals/ijon/SunHWZP20}{
+					LSTM + Triplet Network
+				}{}{}{Y}{Y}{}{}
+				\rsrow{9156794}{
+					CNN $\rightarrow$ Joint Embedding
+				}{Y}{}{Y}{Y}{Y}{Y}
+				\rsrow{DBLP:conf/sigir/LiW0CXC20}{
+					Heirarchical Graph Network
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:journals/corr/abs-2005-06584}{
+					Relational Network + VSE
+				}{}{}{Y}{Y}{}{}
+				\rsrow{DBLP:conf/kdd/ChenHXGGSLPZZ19}{
+					BPR + CNN $\rightarrow$ Transformer
+				}{}{Y}{Y}{Y}{}{Y}
+				\rsrow{DBLP:conf/mm/SongHLCXN19}{
+					CNN + TextCNN
+				}{}{Y}{Y}{Y}{}{Y}
+			\addlinespace
+			\multicolumn{6}{l}{\textit{\footnotemark[1] Purchase data, comments, ratings, reviews}}
+		\end{xltabular}
+	}
+
+	\pagebreak
+
+	A review of Virtual Try-On systems:
+	{
+		\scriptsize
+		\renewcommand{\arraystretch}{1.5}
+		\begin{xltabular}{\textwidth}{
+			p{2cm}
+			p{2cm}
+			X
+		}
+			\toprule
+				\textbf{Technology} &
+				\textbf{Works studied} &
+				\textbf{Limitations} \\
+			\midrule
+				Image-based & 29 \cite{DBLP:conf/iccvw/AyushJCHK19, DBLP:conf/iccv/HanHHS19, DBLP:conf/iccvw/KuboISM19, DBLP:conf/iccvw/LeeLKCP19, DBLP:conf/iccv/YuWX19, DBLP:conf/iccvw/YildirimJVB19, minar2020cp, DBLP:conf/eccv/IssenhuthMC20, minar20203d, DBLP:conf/cvpr/LiCZL21, DBLP:journals/access/MinarTA21, DBLP:conf/cvpr/GeSGY0021, DBLP:conf/cvpr/ChoiPLC21, DBLP:conf/cvpr/GeSZG0021, DBLP:conf/iccv/ChenLHSC21, DBLP:conf/iccv/ChopraJHK21, DBLP:conf/iccv/CuiML21, DBLP:conf/cvpr/FenocchiMCBCC22, DBLP:conf/cvpr/FengMSGLLOZZ22, DBLP:conf/cvpr/HeSX22, DBLP:conf/cvpr/YangY022, DBLP:conf/eccv/BaiZLZY22, DBLP:conf/eccv/LeeGPCC22, DBLP:conf/wacv/FeleLPS22, DBLP:conf/nips/HuangLXKCL22, DBLP:conf/cvpr/ZhuYZRCS0K23, DBLP:journals/corr/abs-2304-02051, DBLP:conf/cvpr/YanGZX23, DBLP:conf/cvpr/XieHDZDZ0L23}
+				& Limited interaction, lack of 360-degree view, limited assessment.
+				\\
+				Pose-guided & 17 \cite{DBLP:conf/cvpr/SongZLM19, DBLP:conf/iccv/AlbaharH19, DBLP:conf/cvpr/LiHL19, DBLP:journals/corr/abs-1906-07251, DBLP:conf/iccv/LiuPML0G19, DBLP:conf/ijcai/HuangXCWZWHD20, DBLP:conf/cvpr/MenMJML20, DBLP:journals/tip/LiZLLD20, DBLP:conf/cvpr/WangWFLZXZ20, DBLP:journals/tip/RenLLL20, DBLP:journals/corr/abs-2008-11898, DBLP:journals/corr/abs-2006-01435, DBLP:journals/tog/AlBaharLYSSH21, DBLP:journals/pami/ZhuHXSCB22, DBLP:conf/cvpr/DongZXZDZLLY22, DBLP:conf/eccv/ZhouYCSGL22, DBLP:conf/cvpr/FruhstuckSSMWL22}
+				& Restricted by training on predefined poses, reliant on pose tracking performance.
+				\\
+				Multi-pose & 5 \cite{DBLP:conf/icip/HsiehCCSC19, DBLP:conf/iccv/DongLSWLZH019, DBLP:journals/access/ThaiMAW21, DBLP:journals/tmm/HuLZR22, du2023cf}
+				& Complex to develop.
+				\\
+				Video & 3 \cite{DBLP:conf/wacv/KuppaJLLM21, DBLP:conf/mm/ZhongWTLW21, DBLP:conf/cvpr/JiangWYL22}
+				& Data intensive.
+				\\
+				3D & 2 \cite{DBLP:conf/wacv/MajithiaPBGSS22, DBLP:conf/nips/SantestebanOTC22}
+				& Mesh generation is complex, inaccurate meshes cause misalignment.
+				\\
+				AR & 9 \cite{DBLP:conf/ieeehpcs/JongM19, di2020comparative, hashmi2020augmented, baytar2020evaluating, shaw2020advanced, ali2021augmented, feng2021personalized, moriuchi2021engagement, DBLP:journals/sensors/BattistoniGRSVB22}
+				& Limited environment adaptability.
+				\\
+			\bottomrule
+		\end{xltabular}
+	}
+
+	\pagebreak
+
+	A review of Commercial Virtual Try-On systems:
+	{
+		\scriptsize
+		\newlength{\limwidth}
+		\setlength{\limwidth}{5.75cm}
+		\begin{xltabular}{\textwidth}{
+			p{1.5cm}
+			X
+			p{\limwidth}
+		}
+			\toprule
+				\textbf{Technology} &
+				\textbf{Item type} &
+				\textbf{Limitations} \\
+			\midrule
+				\textbf{2D} & Clothing \& Accessories & \multirow{3}{\limwidth}{\justifying AI-generated variations of garment try-on images are not true representations of a user trying on the garment.} \\
+				& \cite{WalmartA, WalmartB, GoogleShopping} & \\
+				& & \\
+			\midrule
+				\textbf{AR} & Clothing \& Accessories \cite{Snapchat} & \multirow{2}{\limwidth}{\justifying Most implementations only focus on accessories instead of actual clothing items.} \\
+				& Clothing \cite{Zalando} & \\
+				& Wrist Watches \cite{BaumeMercier} & \\
+				& Eyewear \cite{WarbyParker} & \\
+				& Makeup \cite{YTAR} & \\
+				& Makeup \cite{LOreal} & \\
+			\bottomrule
+		\end{xltabular}
+	}
+\end{frame}
+
+\subsection{Research Gaps}
+\begin{frame}{Research Gaps}
+	The following research gaps were identified from literature review:
+	\begin{enumerate}
+		\item Limited inclusion of body attributes or user interaction data into clothing recommendation systems.
+		\item Limited work done on personalized clothing recommendation.
+		\item Lack of robust and visually appealing AR implementations of virtual try-on.
+		\item Lack of model/system deployment causing deficiency of online performance evaluation under real-world loads and constraints.
+	\end{enumerate}
+\end{frame}
+
+\subsection{Objectives}
+\begin{frame}{Objectives}
+	This project has the following objectives:
+	\begin{enumerate}
+		\item Personalized clothing recommendation.
+		\item Enhanced user engagement strategies.
+		\item Increased consumer conversion rates.
+		\item Reduction of return rates.
+		\item Increased revenue for businesses.
+		\item Data privacy and security compliance.
+		\item Laying groundwork for future integration with personal AI assistants.
+	\end{enumerate}
+\end{frame}

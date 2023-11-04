@@ -1,0 +1,92 @@
+\documentclass[11pt]{beamer}
+
+\mode<presentation> {
+	\usetheme{Madrid}
+}
+
+\usepackage[numbers,sort&compress]{natbib}
+
+\usepackage{ifthen}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xltabular,booktabs,ragged2e}
+\usepackage{multirow}
+\usepackage{multicol}
+
+\usepackage{ieeetrantools}
+
+\title[Computer Engineering]{\small{
+	AI-Based Clothing Recommendation For Try Before Buy
+}}
+
+\author[BE Computer 2023-24]{\small{Risabh Rai, Uday Bhanu Bose, Vipin Kumar Yadav, Vivek Tiwari}}
+
+\institute[AIT]{
+	\vspace*{-0.35cm}
+	\includegraphics[width=1.8cm]{components/images/unipune.jpg}
+	\hspace*{0.25cm}
+	\includegraphics[width=1.8cm]{components/images/logo.png}
+	\vspace*{0.65cm}
+
+	under the guidance of\\
+	\vspace*{0.25cm}
+	\small{Prof. (Dr.) N K Bansode}\\
+	\vspace*{0.25cm}
+	\large{Army Institute of Technology}\\
+	\large{Savitribai Phule Pune University}
+}
+
+\date{\today}
+
+\AtBeginSection[]{
+	\begin{frame}{Contents}
+		\begin{multicols}{2}
+			\tableofcontents[currentsection]
+		\end{multicols}
+	\end{frame}
+	\begin{frame}
+		\vfill \centering
+		\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+			\usebeamerfont{title} \insertsectionhead \par
+		\end{beamercolorbox}
+		\vfill
+	\end{frame}
+}
+
+\begin{document}
+	\bstctlcite{BSTSettings}
+
+	\frame{\titlepage}
+	
+	\begin{frame}{Contents}
+		\begin{multicols}{2}
+			\tableofcontents
+		\end{multicols}
+	\end{frame}
+
+	\include{components/0-intro.tex}
+	\include{components/1-feasibility.tex}
+	\include{components/2-req.tex}
+	\include{components/3-design.tex}
+	\include{components/4-conclusion.tex}
+
+	\begin{frame}{Acknowledgement}
+		
+	\end{frame}
+
+	\begin{frame}[allowframebreaks]{References}
+		\tiny
+		\bibliographystyle{IEEEtranN}
+		\bibliography{
+			components/refs/settings.bib,
+			components/refs/intro.bib,
+			components/refs/rs.bib,
+			components/refs/vton.bib,
+			components/refs/datasets.bib,
+			components/refs/req.bib
+		}
+	\end{frame}
+
+	\frame{\titlepage}
+\end{document}

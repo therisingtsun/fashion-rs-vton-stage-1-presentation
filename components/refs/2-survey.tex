@@ -1,0 +1,681 @@
+\chapter{LITERATURE SURVEY}
+
+\section{Recommendation systems}
+	Recommendation systems leverage data and algorithms to offer personalized suggestions to users, enhancing their decision-making in various domains. These systems use collaborative filtering, content-based filtering, and hybrid approaches, facilitating tailored recommendations, ultimately improving user engagement and satisfaction in diverse applications, from e-commerce to content streaming.
+
+	Clothing and fashion recommendation systems present a unique and intricate challenge compared to general recommendation systems. They must consider not only user preferences but also the highly subjective and context-dependent nature of fashion. Recommending apparel necessitates understanding intricate details like style, fit, and individual tastes, which can evolve over time. The ever-changing fashion trends further complicate the task. Fashion items often involve combinations, making recommendations more complex.
+
+	Moreover, the emotional aspect of fashion and the need for users to express their individuality make it challenging to predict preferences accurately. These systems must encompass visual recognition, trend analysis, and personalization, making fashion recommendation systems not only distinct but also more demanding to develop with precision.
+
+	\subsection{Goals of recommendation systems}
+		Studying the literature for clothing and fashion recommendation systems reveals the following goals:
+
+		\begin{enumerate}
+			\item \textbf{Outfit recommendation:} This is similar to the goal of generic recommendation systems as it aims to recommend garments or outfits based on the user's preferences (e.g., complex color patterns, or specific fabrics and textures), body attributes like color and shape, current trends, and custom contexts specified by the user (e.g., outfit for a formal party) \cite{DBLP:conf/sigir/LiW0CXC20, 9156794, 8932738, DBLP:conf/mm/HidayatiHCHFC18, DBLP:journals/tmm/ZhangJGZZLT17, DBLP:conf/waim/ShaWZFZY16}.
+			
+			\item \textbf{Outfit generation:} This goal is, given a clothing item (e.g., a shirt), find the best garment (e.g., a tie) or outfit (e.g., from pants, skirts, ties, shoes, or hats) that is compatible with the given item. A special case of this goal is pair generation, where one item is the query and a suitable pairing item is needed. This is usually done for top and bottom items \cite{9156535, 9893574, DBLP:conf/kdd/ChenHXGGSLPZZ19}.
+			
+			\item \textbf{Outfit completion:} This is when most of the outfit is in place, and the task is to complete the outfit's missing items (e.g., what shoes to wear with this outfit?). Also known as fill-in-the-blank (FITB) test \cite{9857004, DBLP:journals/corr/abs-2005-06584, DBLP:conf/mm/SongHLCXN19}.
+			
+			\item \textbf{Outfit compatibility evaluation:} Also an implicit goal for other tasks, this aims to score an outfit based on how compatible its constituent elements are. This can be used as a metric to rank outfits (e.g., does the red shirt go well with the black skirt and black socks or is the white shirt better?) \cite{DBLP:journals/eswa/MoZPW23, 10049142, DBLP:journals/eswa/BalimO23,9775146, DBLP:conf/iccvw/KimSMSSP21, DBLP:journals/ijon/SunHWZP20, DBLP:conf/sigir/DongWSDN20, DBLP:conf/www/YinL0019, DBLP:conf/aaai/YangMLWC19}.
+
+			\item \textbf{Explainable recommendation:} An explanation clarifies why something was recommended to the user. Explanations are more transparent than black-box recommendations and improve the user experience in a variety of ways. They enhance user trust and understanding, lead to error detection and correction, mitigate bias and promote fairness, and increase user engagement. In recent years, more work has been done on explainable fashion recommendation \cite{DBLP:journals/tomccap/YangSFWDN21, DBLP:journals/www/LiCH21, 9522737, DBLP:journals/tkde/LinRCRMR20, DBLP:conf/wacv/TangsengO20, DBLP:conf/ijcai/HouWCLZL19, DBLP:conf/sigir/ChenCXZ0QZ19}.
+		\end{enumerate}
+		
+		\newcommand{\checkif}[1]{
+			\ifthenelse{\equal{#1}{Y}}{\checkmark}{}
+		}
+		\newcommand{\rsrow}[8]{
+			\citeauthor{#1} \cite{#1} & #2 &
+			\checkif{#3} &
+			\checkif{#4} &
+			\checkif{#6} &
+			\checkif{#8}
+			\\ \hline
+		}
+
+		\begin{table*}[h!]
+			\caption{Fashion Recommendation Systems}
+			\label{table:rs}
+			\renewcommand{\arraystretch}{1.5}
+			\scriptsize
+			\begin{tabularx}{\textwidth}{
+				p{2cm} | X |
+				>{\centering\arraybackslash}p{1.35cm} |
+				>{\centering\arraybackslash}p{1.6cm} |
+				>{\centering\arraybackslash}p{1.75cm} |
+				>{\centering\arraybackslash}p{1.75cm}
+			}
+				\hline
+					\textbf{Authors} &
+					\textbf{Technique(s)} &
+					\multicolumn{2}{c|}{\textbf{User Inputs}} &
+					\textbf{Outfit Generation} &
+					\textbf{Personalized} \\
+					& &
+					Body Attributes & Interactions\footnotemark[1] & & \\
+				\hline \hline
+					\rsrow{DBLP:journals/eswa/MoZPW23}{
+						Transformer $\rightarrow$ Transformer
+					}{Y}{}{Y}{Y}{}{Y}
+					\rsrow{10049142}{
+						Contextual Attention Network
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:journals/eswa/BalimO23}{
+						CNN $\rightarrow$ LSTM + Transformer
+					}{}{Y}{Y}{}{Y}{}
+					\rsrow{9857004}{
+						Triplet Network
+					}{}{}{Y}{Y}{}{}
+					\rsrow{9893574}{
+						Bi-LSTM, GAN
+					}{}{}{Y}{Y}{}{}
+					\rsrow{9775146}{
+						Bi-LSTM
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:journals/tomccap/YangSFWDN21}{
+						Representation Learning
+					}{}{Y}{Y}{Y}{Y}{}
+					\rsrow{DBLP:conf/iccvw/KimSMSSP21}{
+						CNN + Projection Head
+					}{}{}{Y}{Y}{}{}
+					\rsrow{9156535}{
+						CNN + Triplet Network
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:conf/sigir/DongWSDN20}{
+						Bi-LSTM
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:journals/ijon/SunHWZP20}{
+						LSTM + Triplet Network
+					}{}{}{Y}{Y}{}{}
+					\rsrow{9156794}{
+						CNN $\rightarrow$ Joint Embedding
+					}{Y}{}{Y}{Y}{Y}{Y}
+					\rsrow{DBLP:conf/sigir/LiW0CXC20}{
+						Heirarchical Graph Network
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:journals/corr/abs-2005-06584}{
+						Relational Network + VSE
+					}{}{}{Y}{Y}{}{}
+					\rsrow{DBLP:conf/kdd/ChenHXGGSLPZZ19}{
+						BPR + CNN $\rightarrow$ Transformer
+					}{}{Y}{Y}{Y}{}{Y}
+					\rsrow{DBLP:conf/mm/SongHLCXN19}{
+						CNN + TextCNN
+					}{}{Y}{Y}{Y}{}{Y}
+				\addlinespace
+				\multicolumn{6}{l}{\textit{\footnotemark[1] Purchase data, comments, ratings, reviews}}
+			\end{tabularx}
+		\end{table*}
+		
+	\subsection{Recent works}
+		Approaches from recent literature on clothing and fashion recommendation systems are explored below. They all claim to outperform state-of-the-art methods \cite{DBLP:conf/aaai/HeM16, DBLP:conf/sigir/LiuWW17, DBLP:conf/icdm/KangFWM17, DBLP:conf/sigir/ChenZ0NLC17} and present novel ideas for tackling the task.
+
+		\lithead{DBLP:conf/www/YinL0019}{
+			propose a knowledge learning method that uses both visual compatibility relationships and style information. They also acknowledge that AUC alone as a metric of performance is not enough for recommendation systems as it has the risk of only recommending popular items which have a lot of similarities and overlap even if they are not relevant to the user.
+		}
+		
+		A model for both general compatibility and personalized preference modeling which characterizes item-item and user-item interactions is presented by \lithead{DBLP:conf/mm/SongHLCXN19}{} However, they use a simple linear fusion strategy for combining general compatibility and personalized preference instead of an advanced strategies like attentive fusion.
+		
+		\lithead{DBLP:conf/kdd/ChenHXGGSLPZZ19}{
+			use a transformer to propose a Personalized Outfit Generaion model and deploys it on an industrial-scale application. But since it operates on a commercial platform, it is more susceptible to the cold-start problem as newer items and users get added.
+		}
+		
+		A framework is proposed by \lithead{DBLP:conf/aaai/YangMLWC19}{
+			which places items in a unified embedding space where category complementary relations are encoded as vector translations. However, such embeddings need more exploration of fine-grained relations beyond just category-level co-occurrence to include rules based on color, texture, style, etc.
+		}
+		
+		\lithead{DBLP:journals/corr/abs-2005-06584}{
+			suggest the use of a relational network to develop new compatibility learning models to move past limitations associated with considering entire outfits, and
+		} \lithead{DBLP:conf/sigir/LiW0CXC20}{
+			jointly train fashion compatibility and personalized outfit recommendations for optimal results using graph networks.
+		} However, neither of these approaches consider personal preferences and can improve further by using multi-modal inputs and incorporating them into the graph network.
+		
+		\lithead{9156794}{
+			propose an embedding to identify garments that are compatible with user's body shape and demonstrate how to learn the embedding from catalog images of models of various shapes and sizes wearing fashion items. They use the SMPL \cite{SMPL:2015} model to describe the body attributes.
+		}
+		
+		A multi-modal framework is presented by \lithead{DBLP:journals/ijon/SunHWZP20}{
+			which uses both semantic and visual embeddings for a unified deep learning model.
+		} And \lithead{DBLP:conf/sigir/DongWSDN20}{
+			propose TryOnCM, another multi-modal try-on-guided compatibility modeling scheme to learn compatibility via the try-on appearance of outfit rather than individual items.
+		}
+
+		\lithead{9156535}{
+			demonstrate a scalable approach via category-based subspace attention networks, and introduce an outfit ranking loss function to better model item relationships in an entire outfit.
+		}
+
+		\lithead{DBLP:conf/iccvw/KimSMSSP21}{
+			present a self-supervised learning framework that can learn color and texture-aware features without labeling, thus being better suited for transfer learning. But it assumes similar colors and textures are compatible and does not explore complementary nature of differently colored or textured items.
+		} \lithead{DBLP:journals/tomccap/YangSFWDN21}{
+			propose an attribute-wise explainable fashion compatibility model using representation learning. Although it uses general user preferences from dataset, it does not consider specific user preference while querying, leading to results which are not personalized.
+		}
+
+		As a successor to TryOnCM \cite{DBLP:conf/sigir/DongWSDN20}, \lithead[TryonCM2]{9775146}{
+			is presented, treating outfits as a sequence of items and using a Bi-LSTM to capture latent interaction between items. But the naïve method used to derive local contents by making vertical strips of the try-on outfit image instead of a robust segmentation or other spatial models causes the implementation to suffer.
+		}
+
+		An outfit generation framework is proposed by \lithead{9893574}{
+			which uses a semantic alignment module and a collocation classification module. However, computational complexity for outfit of size N items is $O(N)$ as the framework needs $(N - 1)$ item generators to synthesize complementary fashion items.
+		}
+
+		\lithead{9857004}{
+			present a framework that learns compatibility of entire outfits modeled as unordered sets using self-attention. But it does not consider multi-dimensional image features and only relies on gross features and categorical text descriptions to guide the process.
+		}
+
+		\lithead{DBLP:journals/eswa/BalimO23}{
+			present a new dataset with clothing images and user comments on compatibility, and use this to train a compatibility suggestion text generator. This does not however, evaluate a compatibility score, and only provides simplistic textual feedback of whether outfit is compatible or not.
+		} \lithead{10049142}{
+			combine a categorical dynamic graph convolutional network with multi-layered visual outputs and surrounding contextual information to obtain better fashion characteristics.
+		}
+
+		And finally, \lithead{DBLP:journals/eswa/MoZPW23}{
+			pose personalized outfit compatibility as a multi-label classification problem and use two transformers to discover correlation between visual image features, fashion and physical attributes. The downside to this being an imbalance of fashion-item attribute distribution and outfit physical-label distribution which makes the multi-label classification task challenging.
+		}
+
+	\subsection{Algorithms for clothing recommendation}
+		Clothing or fashion recommendation is a task that can be broken down into two major subtasks: fashion embedding, and recommendation.
+
+		\subsubsection{Fashion embedding}
+			Fashion embedding is the process of representing fashion items like clothing, accessories, and footwear, as numerical vectors in a high-dimensional space. These vectors capture the semantic and stylistic features of fashion items, making them suitable for various tasks within the fashion domain, such as recommendation, retrieval, and classification. The following techniques may be used to create such embeddings:
+
+			\begin{enumerate}
+				\item \textit{Convolutional Neural Networks (CNNs)} process images in layers of learnable filters, and are a fundamental deep learning architecture for image feature extraction.
+				\item \textit{Siamese Networks} are used for learning similarity between pairs of fashion items. They consist of twin neural networks with shared weights which are trained to produce similar embeddings for similar items and dissimilar embeddings for different items.
+				\item \textit{Triplet Networks} extend Siamese networks by learning embeddings for anchor, positive, and negative examples. They aim to minimize distance between similar items (anchor and positive) while maximizing distance between dissimilar items (anchor and negative).
+				\item \textit{Word Embeddings} like Word2Vec, GloVe, or FastText can be used to convert textual descriptions, product names, and user-generated content like comments and reviews into semantic embeddings. These embeddings capture the meaning and context of fashion-related text.
+				\item \textit{Self-Supervised Learning} techniques, like rotation prediction or colorization, can be applied to fashion images to learn useful embeddings by defining pretext tasks and training the model to solve them.
+				\item \textit{Transfer Learning} leverages pretrained embeddings from models trained on large-scale datasets and fine-tunes them on a fashion-specific dataset.
+				\item \textit{Graph Neural Networks (GNNs)} can capture relationships between fashion items, such as co-purchased items, by modeling the fashion data as a graph. Node embeddings in the graph can represent fashion items.
+				\item \textit{Transformers} use self-attention mechanisms to process sequences of data, capturing relationships and dependencies. They excel in natural language processing and vision tasks, learning contextual representations from large datasets.
+			\end{enumerate}
+
+		\subsubsection{Recommendation}
+			Recommendation is the process of suggesting items to users based on their preferences, historical behavior, current trends, social interactions, and other appropriate factors. Recommendations are designed to help users discover relevant and personalized options from a large pool of choices, ultimately enhancing their user experience and decision-making. The following algorithms are commonly used for this:
+
+			\begin{enumerate}
+				\item \textit{Content-based Filtering} suggests items to users based on their past preferences and the attributes of items, matching user profiles with item features for recommendations.
+				\item \textit{Collaborative Filtering} predicts a user's preferences by analyzing past behaviors and comparing them with similar users' behaviors to recommend items they might like.
+					\begin{enumerate}
+						\item \textit{Matrix Factorization} decomposes a user-item interaction matrix into latent factors to learn representations for users and items, enabling personalized recommendations based on these factors.
+						\item \textit{Bayesian Personalized Ranking (BPR)} optimizes personalized ranking by considering pairwise preferences, learning to rank items based on user interactions, and implicit feedback data.
+					\end{enumerate}
+				\item \textit{Hybrid Approaches} combine collaborative filtering and content-based filtering methods to provide personalized recommendations, leveraging both user behavior and item attributes for improved accuracy and diversity.
+					\begin{enumerate}
+						\item \textit{Graph-Based Models} utilize graph structures to capture relationships between users, items, or content for recommendation.
+						\item \textit{Sequence-Based Models} like Recurrent Neural Networks (RNNs), Long Short-Term Memory (LSTM), and Transformers capture and leverage sequential patterns in user behavior and interactions over time.
+					\end{enumerate}
+			\end{enumerate}
+
+\section{Virtual try-on}
+	Virtual try-On systems represent a cutting-edge fusion of technology and fashion retail, revolutionizing the way consumers interact with clothing online. These systems utilize artificial intelligence, computer vision, and augmented reality to simulate the experience of trying on clothing virtually. Users can see how garments fit, drape, and look on their own bodies without physically trying them on. From 2D image-based try-ons to advanced 3D models, these systems offer a range of immersive experiences.
+	
+	The goal of virtual try-on is not only to enhance user confidence and satisfaction, but also to reduce return rates, making it a pivotal tool in modern e-commerce. It showcases the potential of technology to bridge the gap between digital and physical retail, offering consumers an engaging and informative way to make fashion choices online.
+
+	\subsection{Image-based (2D) virtual try-on}
+		Image-based try-on systems take in images as input data and generate images as output data. The systems infer data like pose, warp, and occlusion of the target and then use that information to guide the generation of the post-try-on image.
+
+		\lithead{DBLP:conf/iccvw/AyushJCHK19}{
+			present a multi-scale patch adversarial loss function that improves cloth fit and texture preservation in virtual try-on. A Geometric Matching Module (GMM) enhances control over shape and pose transformations, and adversarial loss promotes realistic texture and body shape propagation. Reformulation as a conditional image generation problem offers an economical virtual try-on solution without 3D information.
+		} In another work \cite{DBLP:conf/iccvw/AyushJCK19}, they demonstrate how multi-task learning improves efficiency and task performance. Auxiliary tasks like semantic segmentation can enhance virtual try-on, and pseudo ground-truth masks aid in image fusion, leading to a better fit.
+		
+		\lithead[ClothFlow]{DBLP:conf/iccv/HanHHS19}{
+			utilizes dense optical flow estimation for natural-looking clothing deformation and appearance transfer. The cascaded flow network ensures accurate appearance matching, enhancing clothed person generation and a conditional layout generator disentangles shape and appearance for spatially coherent results.
+		} And in a similar vein, \lithead[UVTON]{DBLP:conf/iccvw/KuboISM19}{
+			leverages UV mapping for accurate virtual try-on across diverse postures.
+		} Both of these rely on DensePose integrations to enhance mapping precision by estimating 3D surface information for each pixel. However, DensePose accuracy is crucial for success and that is challenging as warping 2D image textures to predefined coordinate systems can introduce artifacts.
+
+		\lithead[LA-VITON]{DBLP:conf/iccvw/LeeLKCP19}{
+			excels in damage-free, visually appealing virtual try-on results by using a GMM and Try-On Module (TOM) to ensure seamless synthesis. A Grid interval consistency loss maintains shape and pattern consistency, and an occlusion-handling technique enhances geometric matching for superior results.
+		} And \lithead[VTNFP]{DBLP:conf/iccv/YuWX19}{
+			retains clothing and body details by leveraging a GAN \cite{DBLP:journals/corr/GoodfellowPMXWOCB14} and cGAN's \cite{DBLP:journals/corr/MirzaO14} powerful generative capabilities.
+		}
+
+		The use of StyleGAN \cite{DBLP:journals/pami/KarrasLA21} by \lithead{DBLP:conf/iccvw/YildirimJVB19}{
+			enables high-resolution fashion model image generation, enhancing clothing shopping visualizations. Conditional StyleGAN with embedding network allows customization of outfits and poses for fashion models. Swapping style vectors in unconditional StyleGAN enhances flexibility in image generation. Further, deep pose estimator and keypoint extraction improve accuracy in representing body poses.
+		}
+
+		\lithead[CP-VTON+]{minar2020cp}{
+			corrects clothing-agnostic human representation by addressing labeling and omission issues. It enhances composition masks using input clothing mask and a concrete loss function.
+		} \lithead[WUTON]{DBLP:conf/eccv/IssenhuthMC20}{
+			adopts a student-teacher paradigm to improve virtual try-on performance by exploiting masked information. Adversarial loss ensures the student model mimics real image distribution, enhancing realism. A Real-time virtual try-on is achieved by omitting human parser and pose estimator at inference.
+		}
+
+		A hybrid 2D-3D method proposed by \lithead{minar20203d}{
+			enables accurate 3D clothing reconstruction for natural shapes. 3D deformations preserve clothing characteristics, especially for large transformations or detailed textures, and the template-based approach aligns clothing image with the silhouette of the body's 3D model for precise reconstruction. SMPL model ensures accurate representation of diverse body shapes and poses. An updated TOM network enhances blending stage for improved virtual try-on results.
+		}
+
+		\lithead[OVNet]{DBLP:conf/cvpr/LiCZL21}{
+			presents a method to capture important details resulting in high-quality virtual try-on images. It also consists of a semantic layout generator and a pipeline which uses multiple coordinated warps for image generation, yielding consistent improvements in detail. But it does not handle variations in body shape, which limits its ability to dress garments directly on different body types. It also does not address the challenge of obtaining 3D measurements of garments and users.
+		}
+
+		Yet another hybrid approach is proposed in \lithead[CloTH-VTON+]{DBLP:journals/access/MinarTA21}{
+			which combines 2D and 3D methods for realistic clothing deformations while preserving details. 2D methods generate disclosed human parts, ensuring visually appealing try-on outputs, while 3D cloth reconstruction allows flexibility in applying the method to different clothing styles.
+		}
+
+		\lithead[DCTON]{DBLP:conf/cvpr/GeSGY0021}{
+			produces realistic images for try-on by disentangling important components. It makes use of a perceptual loss function to ensure that CNN feature representations are similar between warped clothes. It disentangles clothing, skin, and background components from input images. However, it does not differentiate clothing and non-clothing regions, which can hinder the quality of results.
+		}
+
+		Successful high-resolution virtual try-on synthesis is achieved by \lithead[VITON-HD]{DBLP:conf/cvpr/ChoiPLC21}{} It introduces a misalignment-aware normalization technique to address spatial deformation and generate properly aligned images and utilizes conditional normalization layers to preserve semantic information and apply spatially varying affine transformations.
+
+		Another student-teacher model, \lithead[PF-AFN]{DBLP:conf/cvpr/GeSZG0021}{
+			generates photo-realistic images but does not relying on human parsing. It does so by using appearance flows between person and garment images, which enables accurate dense correspondences and high-quality results. It introduces an adjustable distillation loss function to ensure accurate representations and predictions. However, heavily relies on the use of a parser-based model as the `teacher' network, which may limit the image quality of the `student' network.
+		}
+
+		\lithead[FashionMirror]{DBLP:conf/iccv/ChenLHSC21}{
+			proposes a co-attention feature remapping framework for virtual try-on to generate realistic results with spatio-temporal smoothness. It allows for refinement through convolution and generating different views.
+		} And \lithead[ZFlow]{DBLP:conf/iccv/ChopraJHK21}{
+			presents an end-to-end framework addressing concerns regarding geometric and textural integrity. It incorporates gated aggregation of hierarchical flow estimates (Gated Appearance Flow), and dense structural priors to improve depth perception, handling of occlusion, and reduction of artifacts in try-on outputs.
+		}
+
+		\lithead[DiOr]{DBLP:conf/iccv/CuiML21}{
+			supports various fashion-related tasks such as 2D pose transfer, virtual try-on, and outfit editing. It explicitly encodes the shape and texture of each garment, allowing for separate editing of these elements. A joint training on pose transfer and inpainting helps with detail preservation and coherence of generated garments. However, complex or rarely seen poses may not always be rendered correctly, and ghosting artifacts and improper filling of holes in garments can also be present.
+		}
+
+		\lithead[DBCT]{DBLP:conf/cvpr/FenocchiMCBCC22}{
+			improves the generation of virtual try-on results by dealing with long-range dependencies and achieving more realistic and accurate results and demonstrates its effectiveness in comparison to both standard pure convolutional approaches and previous transformer-based proposals.
+		}
+
+		A cheap and scalable weakly-supervised method is proposed by \lithead{DBLP:conf/cvpr/FengMSGLLOZZ22}{
+			which shows that projecting roughly aligned clothing and body onto the latent space of StyleGAN can yield photo-realistic results. The Deep Generative Projection algorithm has a time cost for semantic and pattern searches and the method still faces difficulty against state-of-the-art methods in handling extremely complicated poses. Has an undesirably high FID score of 48.4.
+		}
+
+		\lithead{DBLP:conf/cvpr/HeSX22}{
+			presents a perceptual loss and a warping model to train the try-on model, which helps improve the quality of the generated appearance flow and the final try-on results. Usage of a pre-trained VGG network \cite{DBLP:journals/corr/SimonyanZ14a} and a parser-based model in the training process enhances the accuracy and effectiveness.
+		}
+
+		Accurate photorealistic results are shown by \lithead[RT-VTON]{DBLP:conf/cvpr/YangY022}{
+			for both standard and non-standard clothes. Is able to handle hard samples such as off-shoulder clothes. Semi-rigid deformation technique used in the method balances the trade-off between rigidity and flexibility of clothes warping.
+		}
+
+		\lithead[SDAFAN]{DBLP:conf/eccv/BaiZLZY22}{
+			enables clothing warping and body synthesizing simultaneously by extracting and merging feature and pixel-level information from different semantic areas. It addresses challenges without relying on intermediate parser-based labels, reducing noise and inaccuracies in the try-on process.
+		} \lithead[HR-VTON]{DBLP:conf/eccv/LeeGPCC22}{
+			ensures information exchange and eliminates misalignment and pixel-squeezing artifacts by filtering out incorrect segmentation map predictions.
+		}
+
+		\lithead[C-VTON]{DBLP:conf/wacv/FeleLPS22}{
+			generates convincing results with subjects even in difficult poses, allowing for synthesis of high-quality try-on results. However, the masking procedure has issues when generating images and loose clothing. Further, it lacks the ability to differentiate between the front and backside of the target garment.
+		} \lithead[3D-GCL]{DBLP:conf/nips/HuangLXKCL22}{
+			incorporates 3D parametric human models as priors to better handle variations of pose and viewpoint. It utilizes 3D-aware global correspondences that encode global semantic correlations.
+		}
+
+		\lithead[TryOnDiffusion]{DBLP:conf/cvpr/ZhuYZRCS0K23}{
+			generates results with significant pose and body shape modification by using a latent diffusion method \cite{DBLP:conf/cvpr/RombachBLEO22}. But it focuses on upper body clothing and does not experiment with full-body try-on. Further, performance with more complex backgrounds is unknown.
+		} \lithead[MGD]{DBLP:journals/corr/abs-2304-02051}{
+			also takes this diffusion model approach and incorporates multimodal inputs such as text, body pose, and sketches and achieves good results in terms of realism and coherence with multimodal inputs. It also introduces new semi-automatically annotated datasets.
+		}
+
+		\lithead[SAL-VTON]{DBLP:conf/cvpr/YanGZX23}{
+			introduces semantically associated landmarks for virtual try-on which helps in addressing misalignment issues and improving the try-on results. It also provides the ability to edit virtual try-on results using landmarks.
+		} \lithead[GP-VTON]{DBLP:conf/cvpr/XieHDZDZ0L23}{
+			preserves semantic information, avoids texture distortion, and handles challenging inputs by employing local flows to warp garment parts individually and dynamically truncating the gradient in the overlap area, effectively avoiding texture squeezing problems. It also easily extendeds to a multi-category scenarios.
+		}
+
+	\subsection{Pose-guided human synthesis}
+		These systems are also image-based, but they focus on transforming a human image from reference to target pose while preserving style but changing clothing.
+
+		\lithead{DBLP:conf/cvpr/SongZLM19} {
+			propose a method that simplifies non-rigid deformation learning by using semantic parsing transformation and appearance generation tasks and attempting end-to-end training which lead to refined results. Semantic generative network helps in transforming semantic parsing maps which in turn facilitates deformation learning. Appearance generative network synthesizes semantic-aware textures for realistic person images.
+		}
+
+		For tasks like person image synthesis, sketch-to-photo, depth up-sampling, \lithead{DBLP:conf/iccv/AlbaharH19}{
+			propose a conditioning scheme with diverse guidance signals and a bi-directional feature transformation for enhanced information flow.
+		}
+
+		For realistic pose transformation with precise pixel transfer, 3D appearance flow is much better. \lithead{DBLP:conf/cvpr/LiHL19}{
+			observe that scarce annotations can be overcome by fitting a 3D model and projecting to 2D for dense appearence flow computation. For accurate pose transfer, synthesized gropund-truths are able to map target poses to 3D appearence flow leading to accurate pose transfer. Such workflows lead to photorealistic images of the target pose.
+		}
+
+		Two discriminators are used by \lithead{DBLP:journals/corr/abs-1906-07251}{
+			to differentiate between real and generated images which ensure that the fashion item remains consistent during synthesis. Image and pose encoders provide crucial context for high-quality image generation and end-to-end training optimizes generative model parameters for synthesis of photorealistic images.
+		}
+
+		Personalized modeling and shape disentanglement is enabled by 3D body mesh recovery module. \lithead{DBLP:conf/iccv/LiuPML0G19}{
+			realize that Liquid Warping GAN with Liquid Warping Block preserves vital details in both image and feature spaces and it also supports flexible warping from multiple sources which lead to diverse results.
+		}
+
+		\lithead{DBLP:conf/ijcai/HuangXCWZWHD20}{
+			introduce adaptive patch normalization which improves performance through region specific normalization. It couples target pose with conditioned appearance for realistic image generation. High flexibility is observed because of decoupling and recoupling of factors. 
+		}
+
+		\lithead{DBLP:conf/cvpr/MenMJML20}{
+			build an Attribute-Decomposed GAN which enabled precise control of attributes during image synthesis. The automatic separation of attributes removes manual annotations and leads to enhanced realism. The dependency on labelled data, however, may limit applicability in situations lacking readily available annotations.
+		}
+
+		GANs can be used to enhance the quality of images which is useful in realistic pose transfer. \lithead[PoNA]{DBLP:journals/tip/LiZLLD20}{
+			has a long range dependency that addresses feature information gaps and self-occlusion issues. Integration of pre-posed image-guided pose feature update and post-posed image feature update improves feature utilization in the transfer process. The method generates sharper, detailed images with lesser parameters and faster speed which increased efficiency for pose transfer tasks. However, struggles with invisible areas and complex poses because of simplified block structure and posing limitations in occlusion handling are observed. Reliance on GAN is expected to cause mode collapse or instability in certain scenarios and it also faces difficulty in preserving fine details and precise transfer of textures when there are significant coordinate differences.
+		}
+
+		\lithead[SPAdaIN]{DBLP:conf/cvpr/WangWFLZXZ20}{
+			extends the already 2D SPADE \cite{DBLP:conf/cvpr/Park0WZ19} approach, enabling effective pose transfer. It works directly on identity meshes, bypassing need for specific additional information. SPAdaIN ResBlocks ensure high-quality output meshes with combined pose and identity information. Geometric details are maintained by edge regularization for enhanced results. Downside to this approach is it's reliance on high quality identity meshes and pose information may hinder practical use in certain scenarios.
+		}
+
+		Combination of flow-based operations and attention is observed by \lithead{DBLP:journals/tip/RenLLL20}{
+			to improve training stability and gradient propagation. It enables accurate feature-level spatial transformation, enhancing pose-guided image generation.
+		}
+
+		Enhanced accessibility and efficiency because of high-resolution appearance transfer without 3D model is attempted by \lithead{DBLP:journals/corr/abs-2008-11898}{} They utilize dense local descriptors for refined details and preserves garment textures and geometry. The progressive training in autoencoder improves generation quality at high resolutions. It realistically reproduces complex garment appearance, including occluded areas, for accurate transfer. However, global perceptual loss might not be able to preserve sharp garment textures, as noted in ablation study.
+
+		\lithead{DBLP:journals/corr/abs-2006-01435}{
+			simplify portrait editing and eliminates manual software use. It also allows simultaneous revision of posture, body figure, and clothing style through use of a GAN-based method which maintains coherency and preserves identity in recaptured portraits. The layout-map guides appearance transformation leading to enhanced accuracy. The hierarchical knowledge aids in effective recapture, especially for invisible parts.
+		}
+
+		\lithead{DBLP:journals/tog/AlBaharLYSSH21}{
+			develop conditional StyleGAN which enables accurate pose-guided image synthesis. The Inpainted Correspondence Field facilitates detail transfer for drastic pose changes. The Spatially Varying Latent Space Modulation preserves local details and photo-realism.
+		}
+
+		As discussed earlier, GANs have been used to enhance image realism and shape consistency which in turn leads to appealing results, acting as high resolution data for training models. \lithead[PATN]{DBLP:journals/pami/ZhuHXSCB22}{
+			demonstrates a Pose-Attentional Transfer Network which allows accurate and natural-looking pose transfers via intermediate representations. Pose distortions are reduced and image quality increases because of Perceptual L1 loss integration.
+		}
+
+		\lithead[wFlow]{DBLP:conf/cvpr/DongZXZDZLLY22}{
+			is capable of transferring arbitrary garments onto challengingly-posed query person images in real-world backgrounds. It efficiently integrates the advantages of 2D pixel-flow and 3D vertex-flow. The self-supervised training scheme used in the paper leverages easily obtainable dance videos to train the model. However, since it focuses on garment transfer in the context of dance videos, it is unclear how well it performs on a large scale or with diverse datasets.
+		}
+
+		Controlled person image synthesis by blending source style with target pose is attempted by \lithead[CASD]{DBLP:conf/eccv/ZhouYCSGL22}{
+			and the self-attention approach aids accurate source appearance encoding which enhances model effectiveness. Contextual loss is computed using VGG-19 features which facilitates image transformation.
+		}
+
+		\lithead[InsetGAN]{DBLP:conf/cvpr/FruhstuckSSMWL22}{
+			combines pretrained GANs for diverse full-body human image generation. Specialized GANs enables seamless integration of parts which ensure high-quality results. It relies however, on pretrained GANs, which potentially, might limits its adaptability to new domains. Also, coordinating multiple generators can be complex, requiring careful tuning and coordination.
+		}
+
+	\subsection{Multi-pose guided virtual try-on}
+		These systems are a step up from pose-guided systems; given a input image of a person, the target clothing, and a target pose, these attempt to generate the person in the target clothing in the target pose.
+
+		\lithead{DBLP:conf/icip/HsiehCCSC19}{
+			propose generation of consecutive arbitrary poses to provide more information for the user to make more informed decisions while purchasing clothes.
+		} And \lithead{DBLP:conf/iccv/DongLSWLZH019}{
+			introduce a three-stage approach that addressed challenges such as self-occlusions, misalignment among diverse poses, and diverse clothes texture. The misalignment between the input human pose and the target pose is alleviated by the use of deep Warp-GAN.
+		}
+
+		\lithead[3D MP-VTON]{DBLP:journals/access/ThaiMAW21}{
+			allows for accurate texture mapping, which is crucial for natural clothing rendering from arbitrary views and it greatly reduces segmentation label imbalance which results in high-quality segmentation and reduced training time.
+		}
+
+		\lithead[SPG-VTON]{DBLP:journals/tmm/HuLZR22}{
+			presents the use of three submodules - semantic prediction module (SPM), clothes warping module (CWM), and try-on synthesis module (TSM) working together to generate visual try-on images with preserved clothing details and desired poses.
+		}
+
+		\lithead[CF-VTON]{du2023cf}{
+			addresses the challenges of preserving the person's identity and unnatural garment alignment. The proposed model includes predicting the "after-try-on" semantic map, warping the garment using an improved GAN and synthesizing a coarse result with a temporal segment network.
+		}
+
+	\subsection{Video virtual try-on}
+		Video virtual try-on systems fit target clothes onto a person in a video with spatio-temporal consistency. This is challenging because usual image-based try-on methods cause frame-to-frame inconsistencies when applied to video data.
+
+		\lithead[ShineOn]{DBLP:conf/wacv/KuppaJLLM21}{
+			demonstrates ReLU and GeLU as the most effective activation functions, and provides clarity on quantifying the isolated visual effect of different design choices. It also specifies hyperparameter details for experimental reproduction. 
+		} And \lithead[MV-VTON]{DBLP:conf/mm/ZhongWTLW21}{
+			transfers desired clothes to frame images through pose alignment and region-wise pixel replacement. It embeds generated frames into the latent space as external memory for subsequent frame generation.
+		}
+
+		\lithead[ClothFormer]{DBLP:conf/cvpr/JiangWYL22}{
+			generates realistic, harmonious, and spatio-temporally consistent try-on videos in complicated environments. It predicts dense flow mapping between body and clothing regions which addresses the challenge of generating accurate warping when occlusions appear in the clothing region.
+		}
+
+	\subsection{3D virtual try-on}
+		3D virtual try-on systems reconstruct 3D meshes of the person and clothing from the target images and then fit the clothing onto the person in attempts to generate a physically accurate 3D render.
+
+		\lithead[ULNeF]{DBLP:conf/wacv/MajithiaPBGSS22}{
+			allows for mix-and-match try-on, addressing the combinatorial complexity of mixing different garments. It works directly on implicit neural representations, which change the paradigm and pioneer new approaches in virtual try-on. However, it only explores garments in T-pose and lacks other variations.
+		}
+
+		The use of fixed topology parametric template mesh models by \lithead{DBLP:conf/nips/SantestebanOTC22}{
+			for known types of garments allows for easy mapping of high-quality texture from input catalog images to UV map panels. The proposed pipeline is compact and scalable which makes it suitable for practical implementation.
+		}
+
+	\subsection{Augmented reality try-on}
+		Augmented reality virtual try-on is the eventual goal of all try-on systems, integrating computer-generated imagery with real-world views, enabling users to virtually try on clothing and accessories in real-time.
+
+		The use of simple video dataset to successfully achieve transfer of clothing segmentation rather than using the DeepFashion dataset is proposed by \lithead{DBLP:conf/ieeehpcs/JongM19}{} But the use of short video datasets may limit dataset size and diversity.
+
+		\lithead{di2020comparative}{
+			proposes the use of four neural models: Fully Connected Neural Network, CNN, MobileNetV1 \cite{DBLP:journals/corr/HowardZCKWWAA17}, and MobileNetV2 \cite{DBLP:conf/cvpr/SandlerHZZC18}, to classify clothing images for computationally limited platforms on which augmented reality is often implemented.
+		}
+
+		\lithead{hashmi2020augmented}{
+			introduce a computationally inexpensive technique using web cam input and Haar cascade classifier \cite{DBLP:conf/cvpr/ViolaJ01} that helps avoid the use of costly kinect sensors. But the sample size used limits generalizability to broader populations. Also, Haar cascade classifier may have limitations in accurately detecting specific body parts, especially under varying lighting conditions and poses.
+		}
+
+		Providing the study of using AR to help online shoppers choose their correct size and help them choose the best option based upon various attributes Stimulus-Organism-Response model. \lithead{baytar2020evaluating}{
+			investigate how AR products are perceived by consumers but the limited dataset reduces the generalizability of the findings. Another limitation is that the garments were 2D and did not wrap around the body.
+		}
+
+		\lithead[AVATAR]{shaw2020advanced}{
+			Advanced Virtual Apparel Try using Augmented Reality (AVATAR) is capable of providing virtual apparel trial using AR. It provides a hardware solution using a multi-sensor body scanner for precise body coordinates. It also facilitates face color recognition, providing personalized apparel recommendations based on skin tone. But no insights about real-world implementation challenges are provided and no information regarding accuracy and reliability of sensors is discussed.
+		}
+
+		\lithead{ali2021augmented}{
+			explore the use of smartphone camera to provide 3d image of product using AR which provides real time AR by using a camera and YOLO for detection. But using YOLO introduces constraints on bounding box predictions, impacting small object detection and unusual configurations. Also, selective search in Faster R-CNN \cite{DBLP:journals/pami/RenHG017} can be time-consuming, affecting overall performance.
+		}
+
+		\lithead{feng2021personalized}{
+			propose the use of AR, Azure Kinect somatosensory, and OpenGL 3D rendering to provide virtual try on experience and enhance clothing customization.
+		} And \lithead{moriuchi2021engagement}{
+			provide an insight about use of chatbots and AR technology in e-commerce. But the included study based upon small sample size of 68 millennials may limit generalizability.
+		}
+
+		\lithead{DBLP:journals/sensors/BattistoniGRSVB22}{
+			explore the role of AR as meta-user interface. It also covers a case study on focus group that validates design patterns, providing insights for improvements.
+		}
+		
+	\subsection{Commercial uses of virtual try-on}
+		Companies are also using virtual try-on systems to provide enhanced experience to customers. Table \ref{table:commercial-vton} lists the various commercially available virtual try-on platforms.
+
+		\newcommand{\commrow}[3]{
+			#2 & \cite{#1} & #3 \\ \addlinespace
+		}
+
+		\newlength{\limwidth}
+		\setlength{\limwidth}{7cm}
+
+		\begin{table}[h!]
+			\caption{Commercial virtual try-on}
+			\label{table:commercial-vton}
+			\begin{tabularx}{\textwidth}{
+				>{\raggedleft\arraybackslash}p{1cm}
+				X
+				p{\limwidth}
+			}
+				\toprule
+					\textbf{Tech.} &
+					\textbf{Item type} &
+					\textbf{Limitations} \\
+				\midrule
+					\textbf{2D} & Clothing \& Accessories & \multirow{4}{\limwidth}{\justifying AI-generated variations of models wearing garments are not true representations of the user trying on the garment.} \\
+					& \cite{WalmartA, WalmartB, GoogleShopping} & \\
+					& & \\
+					& & \\
+				\midrule
+					\textbf{AR} & Clothing \& Accessories \cite{Snapchat} & \multirow{3}{\limwidth}{\justifying Most implementations only focus on accessories instead of actual clothing items.} \\
+					& Clothing \cite{Zalando} & \\
+					& Wrist Watches \cite{BaumeMercier} & \\
+					& Eyewear \cite{WarbyParker} & \\
+					& Makeup \cite{YTAR} & \\
+					& Makeup \cite{LOreal} & \\
+				\bottomrule
+			\end{tabularx}
+		\end{table}
+
+
+\section{Datasets and evaluation metrics}
+	\subsection{Datasets}
+		Fashion AI research relies on diverse datasets containing images, product descriptions, and user interactions. They provide researchers with rich resources for training and evaluating algorithms to improve clothing recommendation, style analysis, and virtual try-on systems. Requirements of a good dataset are as follows:
+
+		\begin{enumerate}
+			\item \textbf{Large and Diverse:} It should include a substantial number of high-quality images, covering a wide range of clothing items, styles, and categories to ensure model robustness and versatility.
+			\item \textbf{High-Quality Images:} The dataset should comprise high-resolution images with clear representations of clothing items to facilitate accurate analysis and modeling.
+			\item \textbf{Annotations:} Precise and comprehensive annotations for each image, including information on clothing attributes (e.g., color, style, pattern), product details (e.g., brand, price), and user interactions (e.g., ratings, reviews).
+			\item \textbf{Variety of Attributes:} Incorporate detailed attributes such as garment type (e.g., dresses, shoes), gender specificity, and size information to enable diverse research applications.
+			\item \textbf{User-Generated Data:} Incorporate data from real-world user interactions, including user-generated content like reviews, ratings, and comments, to capture user preferences and feedback.
+			\item \textbf{Temporal Dynamics:} Include data that capture trends, seasonality, and changing fashion styles over time, enabling research on dynamic fashion recommendation and trend analysis.
+			\item \textbf{Compatibility with AI Models:} The dataset should be preprocessed and formatted well enough for compatibility with common AI and machine learning frameworks, making it readily usable for research purposes.
+			\item \textbf{Balanced Distribution:} Ensure a balanced distribution of clothing categories and attributes to prevent model biases and support fair evaluations.
+			\item \textbf{Privacy and Ethical Considerations:} Address privacy concerns and adhere to ethical standards, including obtaining proper consent for user-generated data and anonymizing sensitive information.
+			\item \textbf{Accessibility:} Make the dataset publicly accessible to encourage collaboration and transparency.
+			\item \textbf{Benchmarking:} Provide clear evaluation metrics and benchmarks, allowing researchers to assess and compare the performance of different AI models accurately.
+			\item \textbf{Updates and Maintenance:} Regularly update and maintain the dataset to reflect changing fashion trends and ensure its relevance for ongoing research.
+		\end{enumerate}
+
+		\newcommand{\datarow}[4]{
+			#2 \cite{#1} & \numprint{#3} & #4 \\ \addlinespace
+		}
+
+		\begin{table}[h!]
+			\caption{Available fashion datasets}
+			\label{table:datasets}
+			\begin{tabularx}{\columnwidth}{
+				p{1cm} p{4cm}
+				>{\raggedleft\arraybackslash}p{2cm} 
+				X
+			}
+				\toprule
+					\textbf{Type} &
+					\textbf{Dataset} &
+					\textbf{Size} &
+					\textbf{Labels} \\
+				\midrule
+					\textbf{2D} & \datarow
+						{DBLP:conf/cvpr/PatelLP20}
+						{TailorNet}
+						{170156}
+						{Gender, pose, style}
+					& \datarow
+						{DBLP:conf/cvpr/GeZWTL19}
+						{DeepFashion2}
+						{801000}
+						{Scale, occlusion, zoom, viewpoint, category, style, bounding-box, dense landmarks, per-pixel mask}
+					& \datarow
+						{DBLP:conf/mm/ZhengYKP18}
+						{ModaNet}
+						{55176}
+						{Pixel annotation, bounding box, polygon}
+					& \datarow
+						{DBLP:journals/corr/abs-1708-07747}
+						{Fashion-MNIST}
+						{70000}
+						{Category}
+					& \datarow
+						{DBLP:conf/iccv/YamaguchiKB13}
+						{Paper Doll}
+						{339797}
+						{Category, pose}
+					\hline \addlinespace
+					\textbf{3D} & \datarow
+						{DBLP:conf/eccv/TiwariBTP20}
+						{SIZER}
+						{2482}
+						{Gender, size, style}
+					& \datarow
+						{DBLP:conf/eccv/ZhuCJCDWCH20}
+						{Deep Fashion3D}
+						{2078}
+						{Pose, feature lines, multi-view images}
+					& \datarow
+						{DBLP:conf/iccv/BhatnagarTTP19}
+						{MGN}
+						{712}
+						{Pose, shape}
+				\bottomrule
+			\end{tabularx}
+		\end{table}
+
+	\subsection{Evaluation metrics}
+		Evaluation metrics are quantitative and qualitative measures used to assess the performance, quality, and effectiveness of systems. They provide objective and subjective criteria for making informed decisions.
+		
+		\subsubsection{Recommendation systems}
+			The following metrics are commonly used for recommendation systems:
+
+			\begin{enumerate}
+				\item Accuracy:
+					\begin{enumerate}
+						\item \textit{Precision} measures the proportion of relevant recommendations among the total recommendations. It focuses on the accuracy of positive predictions.
+						\item \textit{Recall} measures the proportion of relevant recommendations that were successfully predicted. It focuses on the coverage of relevant items.
+					\end{enumerate}
+				\item Ranking:
+					\begin{enumerate}
+						\item \textit{Mean Average Precision (MAP)} measures the average precision across all users, considering the rank of relevant items in the recommendation list.
+						\item \textit{Mean Reciprocal Rank (MRR)} calculates the average reciprocal of the rank at which the first relevant item is found for each user.
+						\item \textit{Normalized Discounted Cumulative Gain (NDCG)} evaluates the ranking quality of recommended items. It gives higher scores to items that are relevant and ranked higher.
+					\end{enumerate}
+				\item Diversity:
+					\begin{enumerate}
+						\item \textit{Intra-List Diversity} measures how diverse the recommended items are within a single recommendation list.
+						\item \textit{Inter-List Diversity} assesses the diversity of recommendations across different users or recommendation lists.
+					\end{enumerate}
+				\item Coverage:
+					\begin{enumerate}
+						\item \textit{Catalog Coverage} assesses the proportion of items in the entire catalog that are recommended to at least one user.
+						\item \textit{User Coverage} measures the percentage of users for whom at least one recommendation is generated.
+					\end{enumerate}
+				\item \textit{Area Under Receiver Operating Characteristic Curve (AUC-ROC)} is used for binary recommendation tasks. It assesses the ability of the model to distinguish between positive and negative items.
+				\item \textit{Hit Rate} measures the percentage of users for whom at least one relevant item is recommended.
+				\item \textit{Mean Squared Error (MSE)} is used in rating prediction tasks to measure the squared difference between predicted and actual ratings. \textit{Root Mean Squared Error (RMSE)} is the square root of MSE to provide an interpretable error measure. \textit{Normalized RMSE} divides RMSE by the range of possible ratings, making it comparable across datasets.
+			\end{enumerate}
+		
+		\subsubsection{Virtual try-on}
+			For image generation (under virtual try-on) the following metrics are commonly used:
+
+			\begin{enumerate}
+				\item \textit{Fréchet Inception Distance (FID)} measures the similarity between the distribution of real images and generated images in feature space. Lower FID scores indicate better image quality and diversity.
+				\item \textit{Inception Score (IS)} evaluates the quality and diversity of generated images based on the diversity of predicted classes by an Inception classifier. Higher IS scores suggest better image quality and diversity.
+				\item \textit{Structural Similarity Index (SSIM)} measures the structural similarity between a generated image and a reference image. It assesses image quality, preserving structural details. Higher SSIM values indicate better quality.
+				\item \textit{Peak Signal-to-Noise Ratio (PSNR)} measures the peak signal-to-noise ratio between a generated image and a reference image. Higher PSNR values suggest less distortion and higher image quality.
+				\item \textit{Learned Perceptual Image Patch Similarity (LPIPS)} evaluates the perceptual similarity between generated and real images by considering local image patches. Lower LPIPS scores indicate better similarity.
+				\item \textit{Sum of Squared Differences (SSD)} calculates the sum of squared pixel-wise differences between generated and reference images. Smaller SSD values suggest closer resemblance to reference images.
+			\end{enumerate}
+
+			For video generation (under virtual try-on) the following metrics besides SSIM and PSNR are used:
+
+			\begin{enumerate}
+				\item \textit{Fréchet Video Distance (FVD)} measures the similarity between the distribution of feature embeddings from generated and real videos. Lower FVD scores indicate better video quality and diversity.
+				\item \textit{Multi-Scale Structural Similarity (MS-SSIM)} is an extension of SSIM that considers structural similarity at multiple scales. It provides a more comprehensive assessment of image quality.
+				\item \textit{Temporal Consistency and Smoothness} evaluates the temporal coherency and smoothness of generated videos, checking for flickering, jittering, ghosting, or abrupt transitions between frames.
+				\item \textit{Perceptual Video Quality Metrics} like \textit{Video Multimethod Assessment Fusion (VMAF)} and \textit{PSNR with Human Visual System accounting for visual Masking (PSNR-HVS-M)} specific video quality metrics that take into account human visual perception to assess video quality more accurately.
+			\end{enumerate}
+
+			Lastly, for augmented reality (under virtual try-on) the following metrics are used:
+
+			\begin{enumerate}
+				\item \textit{Tracking Accuracy} measures how accurately the AR system can track and overlay virtual objects onto the real world. It includes metrics like tracking error and jitter.
+				\item \textit{Latency} assesses the delay between user actions or movements and the system's response, aiming for low-latency AR experiences.
+				\item \textit{Frame Rate} evaluates the smoothness of AR rendering by measuring the number of frames displayed per second. Higher frame rates contribute to smoother and more immersive experiences.
+				\item \textit{Calibration Accuracy} measures the accuracy of spatial calibration between the physical and virtual worlds. It ensures that virtual objects align correctly with the real environment.
+				\item \textit{Stability} assesses the stability of virtual objects as users move or interact with the environment. Stable objects provide a more convincing AR experience.
+				\item \textit{Localization Accuracy} measures how accurately the AR system can determine the user's position and orientation in the real world, essential for precise object placement.
+			\end{enumerate}
+
+	\nocite{stocker2021new, DBLP:journals/csur/ChengSCHL21, Jain_Wah_2022, DBLP:journals/corr/abs-2202-02757, DBLP:journals/sncs/ShirkhaniMSH23, DBLP:journals/corr/abs-2111-00905, DBLP:journals/mta/GhodhbaniNRA22, DBLP:journals/cvm/LiangL21, menon2020impact, jayamini2021use, DBLP:journals/corr/abs-2202-09450, huang2019enhancing, mehta2020enhancement, zak2020augmented, caboni2019augmented, DBLP:journals/access/GiriJZB19, DBLP:journals/corr/abs-2105-03050, DBLP:journals/access/GuoZLCCW23, DBLP:journals/spm/ChenSC23, sahni2021review, liang2020implementation, sareen2022ai, 10153335, DBLP:journals/tmm/Yan0LZX0Y23}
+
+\section{Proposed System}
+	The proposed system represents a pioneering and transformative approach to online clothing shopping, leveraging the power of AI and AR to provide a seamless and immersive try-before-buy experience. At its core, the system is engineered to overcome the challenges inherent in the online fashion retail sector, including uncertainties related to clothing fit, style suitability, and the absence of a physical try-on opportunity. This proposed system consists of a set of cutting-edge components and features that collectively redefine the online shopping landscape:
+
+	\subsection{AI-Driven Recommendation System}
+		The heart of the proposed system is a state-of-the-art AI-driven recommendation engine. This component harnesses the capabilities of machine learning and deep learning algorithms to scrutinise user data, including style preferences, body measurements, historical purchasing patterns, and user feedback. The recommendation system employs advanced algorithms to generate highly personalised clothing suggestions, catering to the user's distinct style and body shape. It leverages AI to adapt to changing user preferences, ensuring that the clothing recommendations evolve and remain relevant over time. The AI-driven recommendation system is not merely a static tool for suggesting clothing items; it's a dynamic and adaptive engine that continually learns from user interactions. This component plays a crucial role in shaping the user's shopping experience, ensuring that every recommendation aligns with individual style preferences, body size, and other personal factors.
+
+	\subsection{AR Virtual Try-On}
+		The proposed system incorporates an innovative AR try-on feature that brings the virtual try-on experience to life. This component utilises cutting-edge AR technology to immerse users in a lifelike virtual fitting room. Users can see themselves in real-time, enhanced with virtual clothing items, enabling a 360-degree view of how different garments fit, move, and complement their bodies. The AR try-on feature is a pinnacle of realism, encompassing markerless tracking for pinpoint clothing placement, real-time cloth physics simulations for natural garment movement, and realistic fabric rendering. It creates a dynamic and interactive fitting experience, offering users the opportunity to assess clothing items as they would in a physical store. This immersive component is designed to eliminate uncertainties about fit and style, ultimately empowering users to make confident choices.
+
+	\subsection{User Profile Management}
+		The system prioritises user personalization through comprehensive profile management. Users have the capability to establish and maintain user profiles, which include personal information, style preferences, and body measurements. This feature enables the AI recommendation system to provide tailored clothing suggestions that precisely align with each user's unique style and fit requirements. User profiles serve as a foundation for personalization and ensure that every recommendation is curated to meet individual tastes and needs.
+
+	\subsection{Clothing Catalog Integration}
+		The system seamlessly integrates with an extensive and regularly updated clothing catalogue that comprises a diverse selection of fashion items from numerous brands and designers. The catalogue is continuously refreshed with the latest fashion trends and selections, offering users access to a dynamic and ever-evolving array of clothing items. Users can explore this extensive catalogue with the assurance that they are perusing the latest and most stylish options.
+
+	\subsection{Real-Time Feedback and Customization}
+		User feedback is pivotal to the system's success. Users have the opportunity to provide real-time feedback during the virtual try-on experience. This input allows the system to make immediate adjustments to garment placement, fit, and style, ensuring that users have full control over their virtual try-on experience. The system allows users to interact with clothing items and make customizations in real-time, enhancing the user's sense of agency and involvement in the fitting process.
+
+	\subsection{Advanced Search and Filtering}
+		To streamline the shopping experience, the proposed system offers advanced search and filtering capabilities. Users can quickly find specific clothing items using a range of criteria, including style, brand, size, price, and more. This feature empowers users to navigate the extensive clothing catalogue efficiently, making it effortless to discover the clothing items that best match their preferences.
+
+	\subsection{Secure User Data Management}
+		Prioritising user data privacy and security is a foundational principle of the system. The system employs robust data encryption and secure user data management practices to safeguard user profiles and sensitive information. Confidentiality and trust are paramount, and users can be confident that their data is protected and used responsibly.
+
+	\subsection{Real-Time Connectivity}
+		The system operates in real-time, offering users instantaneous connectivity to both the AI recommendation engine and the AR try-on feature. Users can experience virtual try-ons instantly, receiving clothing recommendations and visualisations without delay. Real-time connectivity ensures that users can swiftly access and engage with the system's features, enhancing the efficiency of the online shopping experience.
+
+	\subsection{Cross-Platform Accessibility}
+		The proposed system is designed with accessibility in mind. It is accessible across various platforms, including web browsers, mobile applications, and augmented reality devices. This cross-platform approach ensures that users can engage with the system on their preferred devices, making it versatile and user-friendly.
