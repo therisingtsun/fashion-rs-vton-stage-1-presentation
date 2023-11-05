@@ -2,25 +2,69 @@
 
 \subsection{Software \& Hardware Requirements}
 \begin{frame}{Software \& Hardware Requirements}
+	\begin{multicols}{2}
+		Software Requirements:
+		\begin{itemize}
+			\item \textbf{Libraries \& frameworks:} PyTorch, Huggingface Transformers, Optimum, ONNX Runtime, Express, AR.js.
+			\item \textbf{Programming languages:} Python, HTML, JS, CSS.
+			\item \textbf{Database:} Apache Cassandra.
+		\end{itemize}
 
+		\break
+
+		Hardware Requirements:
+		\begin{itemize}
+			\item Device with integrated or attachable camera.
+			\item \textbf{CPU:} Multi-core 2.5 GHz.
+			\item \textbf{GPU:} 8GB VRAM for training. And any Vulkan-enabled GPU for end-user.
+			\item Stable internet connectivity.
+		\end{itemize}
+	\end{multicols}
 \end{frame}
 
 \subsection{Information Domain Analysis}
 \begin{frame}{Information Domain Analysis}
-
+	The system should:
+	\begin{enumerate}
+		\item Be aware of the aspects of human body to be able to segment the needed parts for further processing.
+		\item Learn to process the parts, figure out the accurate pose and decide the outfit for the subject.
+		\item Be able to generate outfits based on the segmented parts and be able to recommend the style and proper fit.
+	\end{enumerate}
 \end{frame}
 
 \subsection{External \& Internal Interfacing}
 \begin{frame}{External \& Internal Interfacing}
+	\begin{multicols}{2}
+		External Interfacing:
+		\begin{itemize}
+			\item Primary user interface will be web-based, accessible via standard web browsers.
+			\item The virtual try-on feature requires the use of cameras.
+		\end{itemize}
 
+		\break
+
+		Internal Interfacing:
+		\begin{itemize}
+			\item Clothing recommendation interface.
+			\item AR virtual try-On interface.
+			\item User profile and preferences.
+		\end{itemize}
+	\end{multicols}
 \end{frame}
 
 \subsection{Demand}
 \begin{frame}{Demand}
-
+	\begin{enumerate}
+		\item Logistic costs have been a major issue for a lot of retail and e-commerce companies. Compromising on such costs leads to lower customer satisfaction.
+		\item For fashion purchases through online means, the user should be able to properly judge the outfit without any uncertainty of size issues, color mismatch or simply bad style.
+		\item For the retailers, the experience leads to lower returns and better judgement of the kind of clothes that are in demand.
+	\end{enumerate}
 \end{frame}
 
 \subsection{Stakeholders}
 \begin{frame}{Stakeholders}
-
+	\begin{enumerate}
+		\item \textbf{E-commerce Companies and Retailers:} These stakeholders are at the forefront of the project's impact. The AI-based clothing recommendation and try-on system significantly affect their daily operations and economic viability.
+		\item \textbf{General Population:} While the general population might not immediately sense the direct impact, this technology subtly reshapes their online shopping habits. Over time, users will come to expect personalized recommendations and the ability to virtually try on clothing items.
+	\end{enumerate}
 \end{frame}
